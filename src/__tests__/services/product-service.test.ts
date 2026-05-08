@@ -31,7 +31,7 @@ describe('productService', () => {
     await productService.getProducts({ page: 1, pageSize: 12, countryId: '7' });
 
     expect(global.fetch).toHaveBeenCalledWith(
-      'http://localhost:8080/api/v1/products?countryId=7&page=0&size=12',
+      '/api/v1/products?countryId=7&page=0&size=12',
       expect.objectContaining({
         method: 'GET',
       })
@@ -109,14 +109,14 @@ describe('productService', () => {
     expect(response.success).toBe(true);
     expect(global.fetch).toHaveBeenNthCalledWith(
       1,
-      'http://localhost:8080/api/v1/products/42/variants',
+      '/api/v1/products/42/variants',
       expect.objectContaining({
         method: 'POST',
       })
     );
     expect(global.fetch).toHaveBeenNthCalledWith(
       2,
-      'http://localhost:8080/api/v1/products/42/variants',
+      '/api/v1/products/42/variants',
       expect.objectContaining({
         method: 'POST',
       })

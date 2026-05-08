@@ -3,7 +3,7 @@
  * Handles product stock, inventory management, stock transfers
  */
 
-import { apiClient, ApiResponse, PaginatedResponse } from './api-client';
+import { apiClient, ApiResponse, PaginatedResponse, buildApiUrl } from './api-client';
 
 export enum StockStatus {
   IN_STOCK = 'in_stock',
@@ -375,7 +375,7 @@ class StockService {
     });
 
     const response = await fetch(
-      `${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3001/api'}/stocks/export?${params.toString()}`,
+      buildApiUrl(`/stocks/export?${params.toString()}`),
       {
         method: 'GET',
         headers: {

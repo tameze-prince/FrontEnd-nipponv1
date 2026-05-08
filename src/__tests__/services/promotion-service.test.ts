@@ -43,7 +43,7 @@ describe('promotionService', () => {
       })
     );
     expect(global.fetch).toHaveBeenCalledWith(
-      'http://localhost:8080/api/v1/flash-sales',
+      '/api/v1/flash-sales',
       expect.objectContaining({ method: 'GET' })
     );
   });
@@ -78,7 +78,7 @@ describe('promotionService', () => {
 
     expect(response.success).toBe(true);
     expect(global.fetch).toHaveBeenCalledWith(
-      'http://localhost:8080/api/v1/flash-sales',
+      '/api/v1/flash-sales',
       expect.objectContaining({ method: 'POST' })
     );
   });
@@ -113,7 +113,7 @@ describe('promotionService', () => {
 
     expect(response.success).toBe(true);
     expect(global.fetch).toHaveBeenCalledWith(
-      'http://localhost:8080/api/v1/flash-sales/11',
+      '/api/v1/flash-sales/11',
       expect.objectContaining({ method: 'PUT' })
     );
   });

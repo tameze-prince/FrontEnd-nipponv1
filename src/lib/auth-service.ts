@@ -3,7 +3,7 @@
  * Aligned with the Spring Boot backend contracts.
  */
 
-import { apiClient, ApiResponse } from './api-client';
+import { apiClient, ApiResponse, buildApiUrl } from './api-client';
 
 export interface LoginRequest {
   email: string;
@@ -243,7 +243,7 @@ class AuthService {
 
     try {
       const response = await fetch(
-        `${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8080'}/auth/logout`,
+        buildApiUrl('/auth/logout'),
         {
           method: 'POST',
           headers: {
@@ -283,7 +283,7 @@ class AuthService {
 
     try {
       const response = await fetch(
-        `${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8080'}/auth/refresh`,
+        buildApiUrl('/auth/refresh'),
         {
           method: 'POST',
           headers: {

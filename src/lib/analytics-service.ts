@@ -3,7 +3,7 @@
  * Handles dashboard data, analytics, reports
  */
 
-import { apiClient, ApiResponse } from './api-client';
+import { apiClient, ApiResponse, buildApiUrl } from './api-client';
 
 export interface DashboardMetrics {
   totalRevenue: number;
@@ -346,7 +346,7 @@ class AnalyticsService {
     });
 
     const response = await fetch(
-      `${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3001/api'}/analytics/export?${params.toString()}`,
+      buildApiUrl(`/analytics/export?${params.toString()}`),
       {
         method: 'GET',
         headers: {
