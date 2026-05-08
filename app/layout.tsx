@@ -4,6 +4,10 @@ import { Toaster } from 'sonner';
 import { cn } from "@/lib/utils";
 import Header from '@/components/shared/Header';
 import InitialLocationModal from '@/components/shared/InitialLocationModal';
+import { SpeedInsights } from "@vercel/speed-insights/next";
+
+
+
 
 export const metadata: Metadata = {
   title: 'NipponHub - Produits Japonais',
@@ -25,6 +29,7 @@ export default function RootLayout({
         <InitialLocationModal />
         {children}
         <Toaster position="top-center" richColors closeButton />
+        <SpeedInsights />
       </body>
     </html>
   );
