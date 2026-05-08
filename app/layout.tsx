@@ -5,6 +5,7 @@ import { cn } from "@/lib/utils";
 import Header from '@/components/shared/Header';
 import InitialLocationModal from '@/components/shared/InitialLocationModal';
 import { SpeedInsights } from "@vercel/speed-insights/next";
+import { Analytics } from '@vercel/analytics/next';
 
 
 
@@ -30,6 +31,7 @@ export default function RootLayout({
         {children}
         <Toaster position="top-center" richColors closeButton />
         <SpeedInsights />
+        <Analytics />
       </body>
     </html>
   );
