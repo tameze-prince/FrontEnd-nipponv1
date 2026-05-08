@@ -3,7 +3,7 @@
  * Handles dashboard data, analytics, reports
  */
 
-import { apiClient, ApiResponse, buildApiUrl } from './api-client';
+import { apiClient, ApiResponse } from './api-client';
 
 export interface DashboardMetrics {
   totalRevenue: number;
@@ -346,7 +346,7 @@ class AnalyticsService {
     });
 
     const response = await fetch(
-      buildApiUrl(`/analytics/export?${params.toString()}`),
+      `${process.env.NEXT_PUBLIC_API_URL || 'https://pme6ad6kdt.us-east-1.awsapprunner.comapi'}/analytics/export?${params.toString()}`,
       {
         method: 'GET',
         headers: {

@@ -3,7 +3,7 @@
  * Handles product stock, inventory management, stock transfers
  */
 
-import { apiClient, ApiResponse, PaginatedResponse, buildApiUrl } from './api-client';
+import { apiClient, ApiResponse, PaginatedResponse } from './api-client';
 
 export enum StockStatus {
   IN_STOCK = 'in_stock',
@@ -375,7 +375,7 @@ class StockService {
     });
 
     const response = await fetch(
-      buildApiUrl(`/stocks/export?${params.toString()}`),
+      `${process.env.NEXT_PUBLIC_API_URL || 'https://pme6ad6kdt.us-east-1.awsapprunner.com/api'}/stocks/export?${params.toString()}`,
       {
         method: 'GET',
         headers: {

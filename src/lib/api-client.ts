@@ -3,20 +3,8 @@
  * Central configuration for all API calls
  */
 
-const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL?.replace(/\/$/, '') || '';
+const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || 'https://pme6ad6kdt.us-east-1.awsapprunner.com';
 const API_TIMEOUT = 30000; // 30 seconds
-
-export function buildApiUrl(endpoint: string, baseUrl: string = API_BASE_URL) {
-  if (/^https?:\/\//i.test(endpoint)) {
-    return endpoint;
-  }
-
-  if (!baseUrl) {
-    return endpoint;
-  }
-
-  return `${baseUrl}${endpoint.startsWith('/') ? endpoint : `/${endpoint}`}`;
-}
 
 export interface ApiResponse<T> {
   success: boolean;
@@ -111,7 +99,7 @@ class ApiClient {
 
   async get<T>(endpoint: string): Promise<ApiResponse<T>> {
     try {
-      const response = await this.fetchWithTimeout(buildApiUrl(endpoint, this.baseUrl), {
+      const response = await this.fetchWithTimeout(`${this.baseUrl}${endpoint}`, {
         method: 'GET',
         headers: this.getHeaders(),
       });
@@ -125,7 +113,7 @@ class ApiClient {
   async post<T>(endpoint: string, data?: any): Promise<ApiResponse<T>> {
     try {
       const isFormData = data instanceof FormData;
-      const response = await this.fetchWithTimeout(buildApiUrl(endpoint, this.baseUrl), {
+      const response = await this.fetchWithTimeout(`${this.baseUrl}${endpoint}`, {
         method: 'POST',
         headers: this.getHeaders(isFormData),
         body: isFormData ? data : JSON.stringify(data),
@@ -140,7 +128,7 @@ class ApiClient {
   async put<T>(endpoint: string, data?: any): Promise<ApiResponse<T>> {
     try {
       const isFormData = data instanceof FormData;
-      const response = await this.fetchWithTimeout(buildApiUrl(endpoint, this.baseUrl), {
+      const response = await this.fetchWithTimeout(`${this.baseUrl}${endpoint}`, {
         method: 'PUT',
         headers: this.getHeaders(isFormData),
         body: isFormData ? data : JSON.stringify(data),
@@ -155,7 +143,7 @@ class ApiClient {
   async patch<T>(endpoint: string, data?: any): Promise<ApiResponse<T>> {
     try {
       const isFormData = data instanceof FormData;
-      const response = await this.fetchWithTimeout(buildApiUrl(endpoint, this.baseUrl), {
+      const response = await this.fetchWithTimeout(`${this.baseUrl}${endpoint}`, {
         method: 'PATCH',
         headers: this.getHeaders(isFormData),
         body: isFormData ? data : JSON.stringify(data),
@@ -169,7 +157,7 @@ class ApiClient {
 
   async delete<T>(endpoint: string): Promise<ApiResponse<T>> {
     try {
-      const response = await this.fetchWithTimeout(buildApiUrl(endpoint, this.baseUrl), {
+      const response = await this.fetchWithTimeout(`${this.baseUrl}${endpoint}`, {
         method: 'DELETE',
         headers: this.getHeaders(),
       });
